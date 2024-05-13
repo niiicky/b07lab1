@@ -6,15 +6,10 @@ public class Polynomial {
 	// constructor
 	public Polynomial() {
 		coefficients = new double[1];
-		coefficients[0] = 0;
 	}
 	
 	public Polynomial(double coefficients[]) {
-		this.coefficients = new double[coefficients.length];
-		
-		for(int i = 0; i < coefficients.length; i++) {
-			this.coefficients[i] = coefficients[i];
-		}
+		this.coefficients = coefficients;
 	}
 	
 	
