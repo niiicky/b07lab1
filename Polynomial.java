@@ -17,12 +17,13 @@ public class Polynomial {
 	public Polynomial add(Polynomial a) {
 		double sumOfPolynomials[] = new double[Math.max(this.coefficients.length, a.coefficients.length)];
 		
-		for(int i = 0; i < this.coefficients.length; i++) {
-			sumOfPolynomials[i] += this.coefficients[i];
-		}
-		
-		for(int i = 0; i < a.coefficients.length; i++) {
-			sumOfPolynomials[i] += a.coefficients[i];
+		for(int i = 0; i < Math.max(this.coefficients.length, a.coefficients.length); i++) {
+			if(i < a.coefficients.length) {
+				sumOfPolynomials[i] += a.coefficients[i];
+			}
+			if(i < this.coefficients.length) {
+				sumOfPolynomials[i] += this.coefficients[i];
+			}
 		}
 		
 		return new Polynomial(sumOfPolynomials);
