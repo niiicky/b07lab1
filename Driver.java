@@ -1,16 +1,35 @@
 public class Driver {
 	public static void main(String [] args) {
-		Polynomial p = new Polynomial();
-		System.out.println(p.evaluate(3));
-		double [] c1 = {6,0,0,5};
-		Polynomial p1 = new Polynomial(c1);
-		double [] c2 = {0,-2,0,0,-9};
-		Polynomial p2 = new Polynomial(c2);
-		Polynomial s = p1.add(p2);
-		System.out.println("s(0.1) = " + s.evaluate(0.1));
-		if(s.hasRoot(1))
-			System.out.println("1 is a root of s");
-		else
-			System.out.println("1 is not a root of s");
+		double coeff1[] = {-2, 10, -4, 3};
+		double coeff2[] = {2, -10, 4, -3};
+		double coeff3[] = {-3, 4, 5, 6};
+		int exp1[] = {1,2,3,4};
+		
+		Polynomial p1 = new Polynomial();
+		Polynomial p2 = new Polynomial(coeff1, exp1);
+		Polynomial p3 = new Polynomial(coeff2, exp1);
+		Polynomial p4 = new Polynomial(coeff3, exp1);
+		
+		Polynomial result1 = p2.add(p3);
+		System.out.println(result1.coefficients + " " + result1.exponents);
+		System.out.println();
+		Polynomial result2 = p2.add(p4);
+		for(int i = 0; i < result2.coefficients.length; i++) {
+			System.out.println(result2.coefficients[i] + " " + result2.exponents[i]);
+		}
+		System.out.println();
+		
+		Polynomial result3 = p2.multiply(p3);
+		for(int i = 0; i < result3.coefficients.length; i++) {
+			System.out.println(result3.coefficients[i] + " " + result3.exponents[i]);
+		}
+		System.out.println();
+		
+		System.out.println(p1.evaluate(1));
+		System.out.println();
+		
+		p2.saveToFile("test.txt");
+		System.out.println("done");
+
 	}
 }
