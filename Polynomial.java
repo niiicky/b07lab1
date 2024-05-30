@@ -32,7 +32,7 @@ public class Polynomial {
 				int x = terms[i].indexOf('x');
 				if(x == -1) {
 					coefficients[i] = Double.parseDouble(terms[i]);
-					exponents[i] = 1;
+					exponents[i] = 0;
 				}
 				else {
 					coefficients[i] = Double.parseDouble(terms[i].substring(0, x));
@@ -72,17 +72,18 @@ public class Polynomial {
 		
 		double[] coefficients1 = new double[num];
 		int[] exponents1 = new int[num];
+		Arrays.setAll(exponents1, trackExp::get); //map Arraylist to an array of ints
 		int zeroTerms = 0;
 		
 		for(int i = 0; i < Math.max(this.exponents.length, a.exponents.length); i++) {
 			boolean next = false;
 			for(int j = 0; j < exponents1.length; j++) {
-				if((i < a.exponents.length) && (exponents1[j] == 0 || exponents1[j] == a.exponents[i])) {
+				if((i < a.exponents.length) && (exponents1[j] == a.exponents[i])) {
 					coefficients1[j] += a.coefficients[i];
 					exponents1[j] = a.exponents[i];
 					next = true;
 				}
-				if((i < this.exponents.length) && (exponents1[j] == 0 || exponents1[j] == this.exponents[i])) {
+				if((i < this.exponents.length) && (exponents1[j] == this.exponents[i])) {
 					coefficients1[j] += this.coefficients[i];
 					if(coefficients1[j] == 0) zeroTerms++;
 					exponents1[j] = this.exponents[i];
@@ -153,11 +154,12 @@ public class Polynomial {
 		double coefficients2[] = new double[num];
 		int exponents2[] = new int[num];
 		
+		Arrays.setAll(exponents2, trackExp::get);
+		
 		for(int i = 0; i < exponents1.length; i++) {
 			for(int j = 0; j < exponents2.length; j++) {
-				if(exponents2[j] == 0 || exponents2[j] == exponents1[i]) {
+				if(exponents2[j] == exponents1[i]) {
 					coefficients2[j] += coefficients1[i];
-					exponents2[j] = exponents1[i];
 					break;
 				}
 			}
@@ -174,8 +176,8 @@ public class Polynomial {
 			
 			if(this.coefficients != null) {
 				for(int i = 0; i < this.coefficients.length; i++) {
-					if(i > 0 && this.coefficients[i] > 0) result = result + "+";
-					if(this.exponents[i] != 1) {
+					if(i > 0 && this.coefficients[i] >= 0) result = result + "+";
+					if(this.exponents[i] != 0) {
 						result = result + this.coefficients[i] + "x" + this.exponents[i];
 					}
 					else {

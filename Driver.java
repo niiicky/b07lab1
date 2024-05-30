@@ -3,7 +3,7 @@ public class Driver {
 		double coeff1[] = {-2, 10, -4, 3};
 		double coeff2[] = {2, -10, 4, -3};
 		double coeff3[] = {-3, 4, 5, 6};
-		int exp1[] = {1,2,3,4};
+		int exp1[] = {0,1,3,4};
 		
 		Polynomial p1 = new Polynomial();
 		Polynomial p2 = new Polynomial(coeff1, exp1);
